@@ -1,0 +1,10 @@
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/bin/Debug/netcoreapp2.1/Sudoku.deps.json
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/bin/Debug/netcoreapp2.1/Sudoku.runtimeconfig.json
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/bin/Debug/netcoreapp2.1/Sudoku.runtimeconfig.dev.json
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/bin/Debug/netcoreapp2.1/Sudoku.dll
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/bin/Debug/netcoreapp2.1/Sudoku.pdb
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/obj/Debug/netcoreapp2.1/Sudoku.csprojAssemblyReference.cache
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/obj/Debug/netcoreapp2.1/Sudoku.AssemblyInfoInputs.cache
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/obj/Debug/netcoreapp2.1/Sudoku.AssemblyInfo.cs
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/obj/Debug/netcoreapp2.1/Sudoku.dll
+/Users/ameyadeepaknagnur/Projects/Sudoku/Sudoku/obj/Debug/netcoreapp2.1/Sudoku.pdb
