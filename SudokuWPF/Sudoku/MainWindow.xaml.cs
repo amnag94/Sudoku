@@ -130,7 +130,11 @@ namespace Sudoku
 
         private void Reveal_Click(object sender, RoutedEventArgs e)
         {
-            viewmodel.Reveal();
+            if (btn_clicked != null)
+            {
+                btn_clicked.Content = "-1";
+                viewmodel.Reveal();
+            }
         }
 
         private void Validate_Click(object sender, RoutedEventArgs e)

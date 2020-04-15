@@ -47,7 +47,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Name="SudokuCell" Content="{Binding }" Background="AliceBlue" Width="40" Height="40" Click="Button_Click"></Button>
+                                <Button Name="SudokuCell" Content="{Binding Path=Digit, Mode=TwoWay}" Background="AliceBlue" Width="40" Height="40" Click="Button_Click"></Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

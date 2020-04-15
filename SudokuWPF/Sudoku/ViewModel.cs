@@ -11,7 +11,9 @@ namespace Sudoku
     {
         int size_puzzle;
 
-        public ObservableCollection<ObservableCollection<string>> puzzle;
+        public ObservableCollection<ObservableCollection<Cell>> puzzle;
+
+        public ObservableCollection<ObservableCollection<Cell>> solution;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,7 +26,6 @@ namespace Sudoku
         public ViewModel(int size_puzzle)
         {
             this.size_puzzle = size_puzzle;
-            puzzle = new ObservableCollection<ObservableCollection<string>>();
         }
 
         private int[] GetAllValues()
@@ -41,26 +42,48 @@ namespace Sudoku
 
         private void StorePuzzle(SudokuModel model)
         {
-            for(int row = 0; row < size_puzzle; row++)
+            this.puzzle = new ObservableCollection<ObservableCollection<Cell>>();
+
+            for (int row = 0; row < size_puzzle; row++)
             {
-                this.puzzle.Add(new ObservableCollection<string>());
+                this.puzzle.Add(new ObservableCollection<Cell>());
                 for(int column = 0; column < size_puzzle; column++)
                 {
-                    this.puzzle[row].Add(model.puzzle[row][column].Digit);
+                    this.puzzle[row].Add(new Cell { Digit = model.puzzle[row][column].Digit });
                 }
             }
         }
 
+        private void StoreSolution(SudokuModel model)
+        {
+            this.solution = new ObservableCollection<ObservableCollection<Cell>>();
+
+            for (int row = 0; row < size_puzzle; row++)
+            {
+                this.solution.Add(new ObservableCollection<Cell>());
+                for (int column = 0; column < size_puzzle; column++)
+                {
+                    this.solution[row].Add(new Cell { Digit = model.puzzle[row][column].Digit });
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Modify the value in puzzle using solution to 
+        ///     reveal the answer for that item using 2 way binding.
+        ///     We have set Digit of item to be revealed as -1
+        ///     using binding from view to source.
+        /// </summary>
         public void Reveal()
         {
-            ObservableCollection<ObservableCollection<string>> ui_puzzle = new ObservableCollection<ObservableCollection<string>>();
-
             for(int row = 0; row < size_puzzle; row++)
             {
-                ui_puzzle.Add(new ObservableCollection<string>());
                 for(int column = 0; column < size_puzzle; column++)
                 {
-                    ui_puzzle[row].Add(Puzzle[row][column]);
+                    if(Puzzle[row][column].Digit == "-1")
+                    {
+                        puzzle[row][column].Digit = solution[row][column].Digit;
+                    }
                 }
             }
         }
@@ -104,6 +127,9 @@ namespace Sudoku
         public void ShowSudoku(double difficulty)
         {
             SudokuModel model = SetUpPuzzle(difficulty);
+
+            // Store solution
+            StoreSolution(model);
 
             //Solution
             //DisplayPuzzle(model);
@@ -165,7 +191,7 @@ namespace Sudoku
             {
                 for (int column = 0; column < size_puzzle; column++)
                 {
-                    string value = this.puzzle[row][column];
+                    string value = this.puzzle[row][column].Digit;
 
                     if (value == " ")
                     {
@@ -199,7 +225,7 @@ namespace Sudoku
             
         }
 
-        public ObservableCollection<ObservableCollection<string>> Puzzle
+        public ObservableCollection<ObservableCollection<Cell>> Puzzle
         {
             get
             {

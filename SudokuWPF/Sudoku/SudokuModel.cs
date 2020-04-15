@@ -43,7 +43,7 @@ namespace Sudoku
     {
         int size_puzzle;
         double difficulty;
-        public Cell[][] puzzle { get; set; }
+        public Cell[][] puzzle;
         private bool[][] positions;
         static SudokuModel model_instance;
 
