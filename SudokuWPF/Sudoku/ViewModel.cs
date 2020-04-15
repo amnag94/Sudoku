@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Sudoku
@@ -139,9 +140,47 @@ namespace Sudoku
 
         }
 
+        public void SavePuzzle()
+        {
+            string[] linesToWrite = new string[size_puzzle];
+            string saved_puzzle = "";
+
+            for (int row = 0; row < size_puzzle; row++)
+            {
+                for (int column = 0; column < size_puzzle; column++)
+                {
+                    string value = this.puzzle[row][column];
+
+                    if (value == " ")
+                    {
+                        saved_puzzle += "X ";
+                    }
+                    else
+                    {
+                        saved_puzzle += value + " ";
+                    }
+                }
+
+                // Avoid extra space added
+                linesToWrite[row] = saved_puzzle;
+                saved_puzzle = "";
+            }
+
+            File.WriteAllLines(@"../Saved_Puzzle.txt", linesToWrite);
+        }
+
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            for(int row = 0; row < size_puzzle; row++)
+            {
+                for(int column = 0; column < size_puzzle; column++)
+                {
+                    Console.Write(Puzzle[row][column] + " ");
+                }
+                Console.WriteLine();
+            }
+            
         }
 
         public string[][] Puzzle

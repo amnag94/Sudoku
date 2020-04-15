@@ -12,7 +12,7 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -23,14 +23,14 @@
 
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Sudoku" FontSize="20" TextAlignment="Center"></TextBlock>
         
-        <ComboBox Name="SelectValue" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="40" Background="AliceBlue" Visibility="Hidden" SelectedIndex="0" SelectionChanged="SelectValue_SelectionChanged">
+        <ComboBox Name="SelectValue" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="40" Background="AliceBlue" Visibility="Hidden" SelectedItem="0" SelectionChanged="SelectValue_SelectionChanged">
             
         </ComboBox>
 
         <ItemsControl x:Name="SudokuItems" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding Puzzle}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="9"></UniformGrid>
+                    <UniformGrid Name="ColumnGrid" Rows="9"></UniformGrid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
@@ -39,7 +39,7 @@
                     <ItemsControl x:Name="SudokuRows" VerticalAlignment="Center" ItemsSource="{Binding}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Rows="9">
+                                <UniformGrid Name="RowGrid" Columns="9">
                                 </UniformGrid>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
@@ -54,13 +54,11 @@
 
         </ItemsControl>
 
-        <ListBox Name="ButtonsList" Grid.Row="3" Grid.Column="1" Margin="30">
-            <Button Name="Save" Background="Coral" Content="Save" Margin="20" Click="Save_Click"></Button>
-            <Button Name="Reveal" Background="Coral" Content="Reveal" Margin="20" Click="Reveal_Click"></Button>
-            <Button Name="Validate" Background="Coral" Content="Validate" Margin="20" Click="Validate_Click"></Button>
-        </ListBox>
+        <Button Name="Save" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Background="Coral" Content="Save" Height="20" Width="40" Margin="20" Click="Save_Click"></Button>
+        <Button Name="Reveal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Background="Coral" Content="Reveal" Margin="20" Height="20" Width="50" Click="Reveal_Click"></Button>
+        <Button Name="Validate" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Background="Coral" Content="Validate" Margin="20" Height="20" Width="60" Click="Validate_Click"></Button>
     </Grid>
-    
+
 
     <Window.Resources>
         <DataTemplate x:Key="blah" DataType="string">
@@ -68,31 +66,4 @@
         </DataTemplate>
     </Window.Resources>
     
-    <!--<Grid Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-    </Grid>-->
-
-    
-
 </Window>
