@@ -21,13 +21,15 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Sudoku" FontSize="20" TextAlignment="Center"></TextBlock>
-        
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Sudoku" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+
+        <Button Name="Save" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Coral" Content="Save Puzzle" Height="20" Width="80" Margin="20" Click="Save_Click"></Button>
+
         <ComboBox Name="SelectValue" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="40" Background="AliceBlue" Visibility="Hidden" SelectedItem="0" SelectionChanged="SelectValue_SelectionChanged">
             
         </ComboBox>
 
-        <ItemsControl x:Name="SudokuItems" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding Puzzle}">
+        <ItemsControl x:Name="SudokuItems" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding Puzzle, Mode=TwoWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Name="ColumnGrid" Rows="9"></UniformGrid>
@@ -45,7 +47,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Name="SudokuCell" Content="{Binding}" Background="AliceBlue" Width="40" Height="40" Click="Button_Click"></Button>
+                                <Button Name="SudokuCell" Content="{Binding }" Background="AliceBlue" Width="40" Height="40" Click="Button_Click"></Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -54,7 +56,7 @@
 
         </ItemsControl>
 
-        <Button Name="Save" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Background="Coral" Content="Save" Height="20" Width="40" Margin="20" Click="Save_Click"></Button>
+        <Button Name="NewPuzzle" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Background="Coral" Content="New Puzzle" Height="20" Width="70" Margin="20" Click="NewPuzzle_Click"></Button>
         <Button Name="Reveal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Background="Coral" Content="Reveal" Margin="20" Height="20" Width="50" Click="Reveal_Click"></Button>
         <Button Name="Validate" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Background="Coral" Content="Validate" Margin="20" Height="20" Width="60" Click="Validate_Click"></Button>
     </Grid>

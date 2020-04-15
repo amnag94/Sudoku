@@ -25,10 +25,49 @@ namespace Sudoku
         Button btn_clicked;
         String EDITABLE = "Editable";
 
+        const string HARD_STRING = "hard";
+        const string MEDIUM_STRING = "medium";
+        const string EASY_STRING = "easy";
+
+        const double HARD = 0.75;
+        const double MEDIUM = 0.55;
+        const double EASY = 0.40;
+
+        int size_puzzle = 9;
+
+        void Setup(ViewModel viewModel)
+        {
+            string hardness = EASY_STRING;
+
+            double difficulty;
+            switch (hardness)
+            {
+                case HARD_STRING:
+                    difficulty = HARD;
+                    break;
+                case MEDIUM_STRING:
+                    difficulty = MEDIUM;
+                    break;
+                case EASY_STRING:
+                    difficulty = EASY;
+                    break;
+                default:
+                    difficulty = MEDIUM;
+                    break;
+            }
+
+            //ViewModel viewModel = new ViewModel(size_puzzle);
+
+            viewModel.ShowSudoku((1 - difficulty));
+
+            //return viewModel;
+
+        }
 
         public MainWindow()
         {
-            viewmodel = Program.Setup();
+            viewmodel = new ViewModel(size_puzzle);
+            Setup(viewmodel);
             InitializeComponent();
 
             SelectValue.ItemsSource = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -91,12 +130,18 @@ namespace Sudoku
 
         private void Reveal_Click(object sender, RoutedEventArgs e)
         {
-
+            viewmodel.Reveal();
         }
 
         private void Validate_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void NewPuzzle_Click(object sender, RoutedEventArgs e)
+        {
+            // Generates new puzzle for same view model
+            Setup(viewmodel);
         }
     }
 }

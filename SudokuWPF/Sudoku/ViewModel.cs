@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -9,7 +11,7 @@ namespace Sudoku
     {
         int size_puzzle;
 
-        public string[][] puzzle;
+        public ObservableCollection<ObservableCollection<string>> puzzle;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,7 +24,7 @@ namespace Sudoku
         public ViewModel(int size_puzzle)
         {
             this.size_puzzle = size_puzzle;
-            puzzle = new string[size_puzzle][];
+            puzzle = new ObservableCollection<ObservableCollection<string>>();
         }
 
         private int[] GetAllValues()
@@ -41,10 +43,24 @@ namespace Sudoku
         {
             for(int row = 0; row < size_puzzle; row++)
             {
-                this.puzzle[row] = new string[size_puzzle];
+                this.puzzle.Add(new ObservableCollection<string>());
                 for(int column = 0; column < size_puzzle; column++)
                 {
-                    this.puzzle[row][column] = model.puzzle[row][column].Digit;
+                    this.puzzle[row].Add(model.puzzle[row][column].Digit);
+                }
+            }
+        }
+
+        public void Reveal()
+        {
+            ObservableCollection<ObservableCollection<string>> ui_puzzle = new ObservableCollection<ObservableCollection<string>>();
+
+            for(int row = 0; row < size_puzzle; row++)
+            {
+                ui_puzzle.Add(new ObservableCollection<string>());
+                for(int column = 0; column < size_puzzle; column++)
+                {
+                    ui_puzzle[row].Add(Puzzle[row][column]);
                 }
             }
         }
@@ -90,16 +106,16 @@ namespace Sudoku
             SudokuModel model = SetUpPuzzle(difficulty);
 
             //Solution
-            DisplayPuzzle(model);
+            //DisplayPuzzle(model);
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
             // Puzzle
             model.CalculatePuzzleDisplay();
 
             StorePuzzle(model);
 
-            DisplayPuzzle(model);
+            //DisplayPuzzle(model);
         }
 
         private void DisplayPuzzle(SudokuModel model)
@@ -172,18 +188,18 @@ namespace Sudoku
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            for(int row = 0; row < size_puzzle; row++)
+            /*for(int row = 0; row < size_puzzle; row++)
             {
                 for(int column = 0; column < size_puzzle; column++)
                 {
                     Console.Write(Puzzle[row][column] + " ");
                 }
                 Console.WriteLine();
-            }
+            }*/
             
         }
 
-        public string[][] Puzzle
+        public ObservableCollection<ObservableCollection<string>> Puzzle
         {
             get
             {
