@@ -62,21 +62,26 @@ namespace Sudoku
         /// </param>
         private SudokuModel(int size_puzzle, double difficulty)
         {
-            this.size_puzzle = size_puzzle;
-            this.difficulty = difficulty;
+            InitializeModel(size_puzzle, difficulty, this);
+        }
 
-            puzzle = new Cell[size_puzzle][];
-            positions = new bool[size_puzzle][];
+        private static void InitializeModel(int size_puzzle, double difficulty, SudokuModel model)
+        {
+            model.size_puzzle = size_puzzle;
+            model.difficulty = difficulty;
+
+            model.puzzle = new Cell[size_puzzle][];
+            model.positions = new bool[size_puzzle][];
 
             // To avoid NullReferenceException
             for (int puzzle_row = 0; puzzle_row < size_puzzle; puzzle_row++)
             {
-                puzzle[puzzle_row] = new Cell[size_puzzle];
-                positions[puzzle_row] = new bool[size_puzzle];
+                model.puzzle[puzzle_row] = new Cell[size_puzzle];
+                model.positions[puzzle_row] = new bool[size_puzzle];
 
-                for(int puzzle_column = 0; puzzle_column < size_puzzle; puzzle_column++)
+                for (int puzzle_column = 0; puzzle_column < size_puzzle; puzzle_column++)
                 {
-                    puzzle[puzzle_row][puzzle_column] = new Cell();
+                    model.puzzle[puzzle_row][puzzle_column] = new Cell();
                 }
             }
         }
@@ -102,6 +107,10 @@ namespace Sudoku
             if (!(model_instance is SudokuModel))
             {
                 model_instance = new SudokuModel(size_puzzle, difficulty);
+            }
+            else
+            {
+                InitializeModel(size_puzzle, difficulty, model_instance);
             }
 
             return model_instance;

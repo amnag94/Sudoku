@@ -18,7 +18,7 @@ namespace Sudoku
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        ///     Constructor that initializes the puzzle size.
+        ///     Constructor that initializes the puzzle size and puzzle collection.
         /// </summary>
         /// <param name="size_puzzle">
         ///     Size of puzzle to display
@@ -26,6 +26,20 @@ namespace Sudoku
         public ViewModel(int size_puzzle)
         {
             this.size_puzzle = size_puzzle;
+
+            // Initialize the puzzle with all blanks 
+            // so that we only modify it later to 
+            // make binding work
+            this.puzzle = new ObservableCollection<ObservableCollection<Cell>>();
+
+            for (int row = 0; row < size_puzzle; row++)
+            {
+                this.puzzle.Add(new ObservableCollection<Cell>());
+                for (int column = 0; column < size_puzzle; column++)
+                {
+                    this.puzzle[row].Add(new Cell { Digit = "0" });
+                }
+            }
         }
 
         private int[] GetAllValues()
@@ -42,14 +56,13 @@ namespace Sudoku
 
         private void StorePuzzle(SudokuModel model)
         {
-            this.puzzle = new ObservableCollection<ObservableCollection<Cell>>();
+            // Modify puzzle using generated puzzle
 
             for (int row = 0; row < size_puzzle; row++)
             {
-                this.puzzle.Add(new ObservableCollection<Cell>());
                 for(int column = 0; column < size_puzzle; column++)
                 {
-                    this.puzzle[row].Add(new Cell { Digit = model.puzzle[row][column].Digit });
+                    this.puzzle[row][column].Digit = model.puzzle[row][column].Digit;
                 }
             }
         }
@@ -187,9 +200,9 @@ namespace Sudoku
             string[] linesToWrite = new string[size_puzzle];
             string saved_puzzle = "";
 
-            for (int row = 0; row < size_puzzle; row++)
+            for (int row = 0; row < this.puzzle.Count; row++)
             {
-                for (int column = 0; column < size_puzzle; column++)
+                for (int column = 0; column < this.puzzle.Count; column++)
                 {
                     string value = this.puzzle[row][column].Digit;
 

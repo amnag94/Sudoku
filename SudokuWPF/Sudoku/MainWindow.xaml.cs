@@ -70,6 +70,8 @@ namespace Sudoku
             Setup(viewmodel);
             InitializeComponent();
 
+            viewmodel.SavePuzzle();
+
             SelectValue.ItemsSource = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             this.DataContext = viewmodel;
         }
@@ -146,6 +148,7 @@ namespace Sudoku
         {
             // Generates new puzzle for same view model
             Setup(viewmodel);
+            viewmodel.SavePuzzle();
         }
     }
 }
