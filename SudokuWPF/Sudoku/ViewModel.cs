@@ -40,7 +40,7 @@ namespace Sudoku
                 this.puzzle.Add(new ObservableCollection<Cell>());
                 for (int column = 0; column < size_puzzle; column++)
                 {
-                    this.puzzle[row].Add(new Cell { Digit = "0" });
+                    this.puzzle[row].Add(new Cell { digit = 0 });
                 }
             }
 
@@ -272,15 +272,6 @@ namespace Sudoku
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            /*for(int row = 0; row < size_puzzle; row++)
-            {
-                for(int column = 0; column < size_puzzle; column++)
-                {
-                    Console.Write(Puzzle[row][column] + " ");
-                }
-                Console.WriteLine();
-            }*/
-            
         }
 
         public ObservableCollection<ObservableCollection<Cell>> Puzzle

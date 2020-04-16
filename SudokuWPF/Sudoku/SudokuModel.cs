@@ -51,16 +51,8 @@ namespace Sudoku
             }
             set
             {
-                int result;
-                if (Int32.TryParse(value, out result))
-                {
-                    digit = result;
-                    NotifyPropertyChanged();
-                }
-                else
-                {
-                    digit = 0;
-                }
+                digit = value == " " ? 0 : Int32.Parse(value);
+                NotifyPropertyChanged();
             }
         }
     }
