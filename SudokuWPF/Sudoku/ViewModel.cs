@@ -15,6 +15,9 @@ namespace Sudoku
 
         public ObservableCollection<ObservableCollection<Cell>> solution;
 
+        // Maintain originally displayed positions
+        public bool[][] displayedPositions;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -40,6 +43,8 @@ namespace Sudoku
                     this.puzzle[row].Add(new Cell { Digit = "0" });
                 }
             }
+
+            this.displayedPositions = new bool[size_puzzle][];
         }
 
         private int[] GetAllValues()
@@ -60,9 +65,14 @@ namespace Sudoku
 
             for (int row = 0; row < size_puzzle; row++)
             {
+                this.displayedPositions[row] = new bool[size_puzzle];
                 for(int column = 0; column < size_puzzle; column++)
                 {
                     this.puzzle[row][column].Digit = model.puzzle[row][column].Digit;
+                    this.puzzle[row][column].Color = model.puzzle[row][column].Color;
+
+                    // Displayed in original puzzle or not
+                    this.displayedPositions[row][column] = this.puzzle[row][column].digit > 0;
                 }
             }
         }
@@ -99,6 +109,41 @@ namespace Sudoku
                     }
                 }
             }
+        }
+
+        /// <summary>
+        ///     Validates the currently solved puzzle stored in
+        ///     Puzzle with binding from view to source by comparing
+        ///     with solution.
+        /// </summary>
+        /// <returns>
+        ///     True if validated as correctly solved else, False.
+        /// </returns>
+        public bool Validate()
+        {
+            bool flag = true;
+
+            for(int row = 0; row < size_puzzle; row++)
+            {
+                for(int column = 0; column < size_puzzle; column++)
+                {
+                    // Check only for originally blank values
+                    if (!displayedPositions[row][column])
+                    {
+                        if (Puzzle[row][column].Digit != solution[row][column].Digit)
+                        {
+                            flag = false;
+                            Puzzle[row][column].Color = "Red";
+                        }
+                        else
+                        {
+                            Puzzle[row][column].Color = "Green";
+                        }
+                    }
+                }
+            }
+
+            return flag;
         }
 
         private SudokuModel SetUpPuzzle(double difficulty)
@@ -206,7 +251,7 @@ namespace Sudoku
                 {
                     string value = this.puzzle[row][column].Digit;
 
-                    if (value == " ")
+                    if (!this.displayedPositions[row][column])
                     {
                         saved_puzzle += "X ";
                     }

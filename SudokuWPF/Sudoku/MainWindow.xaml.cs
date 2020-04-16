@@ -20,10 +20,9 @@ namespace Sudoku
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Cell> SudokuDisplay { get; set; }
         ViewModel viewmodel;
         Button btn_clicked;
-        String EDITABLE = "Editable";
+        const string EDITABLE = "Editable";
 
         const string HARD_STRING = "hard";
         const string MEDIUM_STRING = "medium";
@@ -112,7 +111,6 @@ namespace Sudoku
 
                 // Indicate as an editable button
                 btn_clicked.Tag = EDITABLE;
-                btn_clicked.BorderBrush = Brushes.Black;
                 btn_clicked.BorderThickness = new Thickness { Bottom = 2, Top = 2, Left = 2, Right = 2 };
 
                 // Set background to normal
@@ -128,12 +126,14 @@ namespace Sudoku
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             viewmodel.SavePuzzle();
+            MessageBox.Show("Puzzle Saved!");
         }
 
         private void Reveal_Click(object sender, RoutedEventArgs e)
         {
             if (btn_clicked != null)
             {
+                // To indicate which item to reveal
                 btn_clicked.Content = "-1";
                 viewmodel.Reveal();
             }
@@ -141,14 +141,21 @@ namespace Sudoku
 
         private void Validate_Click(object sender, RoutedEventArgs e)
         {
-
+            if(viewmodel.Validate())
+            {
+                MessageBox.Show("Well done! Puzzle Solved");
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Solution! Try Again!");
+            }
         }
 
         private void NewPuzzle_Click(object sender, RoutedEventArgs e)
         {
             // Generates new puzzle for same view model
             Setup(viewmodel);
-            viewmodel.SavePuzzle();
+            MessageBox.Show("New Puzzle! Try this one!");
         }
     }
 }

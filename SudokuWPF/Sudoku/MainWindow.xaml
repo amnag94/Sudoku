@@ -21,9 +21,9 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Sudoku" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Sudoku" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
 
-        <Button Name="Save" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Coral" Content="Save Puzzle" Height="20" Width="80" Margin="20" Click="Save_Click"></Button>
+        <Button Name="Save" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Background="WhiteSmoke" BorderThickness="2" Content="Save Puzzle" Height="35" Width="80" Margin="2" Click="Save_Click"></Button>
 
         <ComboBox Name="SelectValue" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="40" Background="AliceBlue" Visibility="Hidden" SelectedItem="0" SelectionChanged="SelectValue_SelectionChanged">
             
@@ -47,7 +47,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Name="SudokuCell" Content="{Binding Path=Digit, Mode=TwoWay}" Background="AliceBlue" Width="40" Height="40" Click="Button_Click"></Button>
+                                <Button Name="SudokuCell" Content="{Binding Path=Digit, Mode=TwoWay}" BorderBrush="{Binding Path=Color, Mode=TwoWay}" BorderThickness="2" Background="AliceBlue" Width="40" Height="40" Click="Button_Click"></Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -56,9 +56,9 @@
 
         </ItemsControl>
 
-        <Button Name="NewPuzzle" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Background="Coral" Content="New Puzzle" Height="20" Width="70" Margin="20" Click="NewPuzzle_Click"></Button>
-        <Button Name="Reveal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Background="Coral" Content="Reveal" Margin="20" Height="20" Width="50" Click="Reveal_Click"></Button>
-        <Button Name="Validate" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Background="Coral" Content="Validate" Margin="20" Height="20" Width="60" Click="Validate_Click"></Button>
+        <Button Name="NewPuzzle" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Background="WhiteSmoke" BorderThickness="2" Content="New Puzzle" Height="32" Width="70" Margin="20" Click="NewPuzzle_Click"></Button>
+        <Button Name="Reveal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Background="WhiteSmoke" BorderThickness="2" Content="Reveal" Margin="20" Height="32" Width="50" Click="Reveal_Click"></Button>
+        <Button Name="Validate" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Background="WhiteSmoke" BorderThickness="2" Content="Validate" Margin="20" Height="32" Width="60" Click="Validate_Click"></Button>
     </Grid>
 
 

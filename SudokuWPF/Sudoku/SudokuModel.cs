@@ -17,6 +17,28 @@ namespace Sudoku
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public string color = "Black";
+
+        /// <summary>
+        ///     Property to bind to color
+        ///     of text for each item
+        /// </summary>
+        public string Color
+        {
+            get
+            {
+                return color;
+            }
+            set
+            {
+                if(value != color)
+                {
+                    color = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         /// <summary>
         ///     Property for digit to enable
         ///     binding to each grid value.
@@ -221,6 +243,7 @@ namespace Sudoku
                     if (!positions[row][column])
                     {
                         puzzle[row][column].digit = 0;
+                        puzzle[row][column].color = "Blue";
                     }
                 }
             }
