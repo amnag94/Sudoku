@@ -17,7 +17,7 @@ namespace Sudoku
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public string color = "Black";
+        public string color = "White";
 
         /// <summary>
         ///     Property to bind to color
@@ -243,7 +243,7 @@ namespace Sudoku
                     if (!positions[row][column])
                     {
                         puzzle[row][column].digit = 0;
-                        puzzle[row][column].color = "Blue";
+                        puzzle[row][column].color = "AliceBlue";
                     }
                 }
             }

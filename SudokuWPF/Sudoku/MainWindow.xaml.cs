@@ -85,6 +85,8 @@ namespace Sudoku
 
             Button btn_current = (Button)e.Source;
 
+            // Reset backgrounds if validate was done
+
             // Only if editable space then perform the following actions
             // Either blank or Tag set to EDITABLE on first update
             if (btn_current.Content.ToString() == " " || (btn_current.Tag != null && btn_current.Tag.ToString() == EDITABLE))
@@ -111,7 +113,7 @@ namespace Sudoku
 
                 // Indicate as an editable button
                 btn_clicked.Tag = EDITABLE;
-                btn_clicked.BorderThickness = new Thickness { Bottom = 2, Top = 2, Left = 2, Right = 2 };
+                //btn_clicked.BorderThickness = new Thickness { Bottom = 2, Top = 2, Left = 2, Right = 2 };
 
                 // Set background to normal
                 btn_clicked.Background = Brushes.AliceBlue;
