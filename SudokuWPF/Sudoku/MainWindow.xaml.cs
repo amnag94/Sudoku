@@ -34,9 +34,8 @@ namespace Sudoku
 
         int size_puzzle = 9;
 
-        void Setup(ViewModel viewModel)
+        void Setup(ViewModel viewModel, string hardness)
         {
-            string hardness = EASY_STRING;
 
             double difficulty;
             switch (hardness)
@@ -66,7 +65,7 @@ namespace Sudoku
         public MainWindow()
         {
             viewmodel = new ViewModel(size_puzzle);
-            Setup(viewmodel);
+            Setup(viewmodel, EASY_STRING);
             InitializeComponent();
 
             viewmodel.SavePuzzle();
@@ -155,8 +154,10 @@ namespace Sudoku
 
         private void NewPuzzle_Click(object sender, RoutedEventArgs e)
         {
+            string difficulty = HARD_STRING;
+
             // Generates new puzzle for same view model
-            Setup(viewmodel);
+            Setup(viewmodel, difficulty);
             MessageBox.Show("New Puzzle! Try this one!");
         }
     }

@@ -21,7 +21,7 @@ namespace Sudoku
 
         /// <summary>
         ///     Property to bind to color
-        ///     of text for each item
+        ///     of background for each item
         /// </summary>
         public string Color
         {
@@ -52,10 +52,14 @@ namespace Sudoku
             set
             {
                 int result;
-                if (Int32.TryParse(value, out result) && result != digit)
+                if (Int32.TryParse(value, out result))
                 {
                     digit = result;
                     NotifyPropertyChanged();
+                }
+                else
+                {
+                    digit = 0;
                 }
             }
         }
